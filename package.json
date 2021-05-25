@@ -1,0 +1,18 @@
+{
+  "name": "KahootSpamBot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "express": "^4.17.1",
+    "kahoot-spammer": "^1.1.2",
+    "kahoot.js-updated": "^3.404.1"
+  }
+}
