@@ -22,10 +22,10 @@ function dockerify(i, args) {
   bot.join(args[0], `${args[1]}${i}`);
 
   bot.on("QuestionStart", question => {
-    console.log(question);
-  });
+    let choice = Math.floor(Math.random() * question.numberOfChoices);
 
-  bot.on("QuizEnd", process.exit);
+    question.answer(choice);
+  });
 }
 
 function sendError(message, error) {
