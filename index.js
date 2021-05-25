@@ -17,7 +17,7 @@ Array.prototype.insert = function(index, item) {
   this.splice(index, 0, item);
 };
 
-function dockerify(i, args) {
+function dockerify(i, args, failed) {
   const bot = new Kahoot;
   bot.join(args[0], `${args[1]}${i}`);
 
@@ -26,6 +26,8 @@ function dockerify(i, args) {
 
     question.answer(choice);
   });
+
+  bot.on('Disconnect', failed);
 }
 
 function sendError(message, error) {
@@ -35,6 +37,9 @@ function sendError(message, error) {
       break;
     case 'num':
       error = 'game pin and amount of bots should only be positive integers(numbers)!';
+      break;
+    case '404':
+      error = 'GameNotFound!';
       break;
   }
 
@@ -82,9 +87,15 @@ client.on('message', message => {
       sendError(message, 'num');
       return;
     }
-
-    for (i = 1; i <= args[2]; i++) {
-      dockerify(i, args);
+    
+    // Callbacking undefined will cause an error
+    try {
+      for (i = 1; i <= args[2]; i++) {
+        dockerify(i, args, undefined);
+      }
+    } catch {
+      sendError(message, '404');
+      return;
     }
 
     let embed = new Discord.MessageEmbed()
