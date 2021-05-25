@@ -17,7 +17,7 @@ Array.prototype.insert = function(index, item) {
   this.splice(index, 0, item);
 };
 
-function dockerify(i, args, failed) {
+function dockerify(i, args) {
   const bot = new Kahoot;
   bot.join(args[0], `${args[1]}${i}`);
 
@@ -26,8 +26,6 @@ function dockerify(i, args, failed) {
 
     question.answer(choice);
   });
-
-  bot.on('Disconnect', failed);
 }
 
 function sendError(message, error) {
@@ -56,7 +54,7 @@ client.once('ready', () => {
 	console.log('Bot Ready!');
 });
 
-client.on('message', message => {
+client.on('message', async message => {
 	if (!message.content.toLowerCase().startsWith(prefix) || message.author.bot) return;
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
@@ -87,19 +85,13 @@ client.on('message', message => {
       sendError(message, 'num');
       return;
     }
-    
-    // Callbacking undefined will cause an error
-    try {
-      for (i = 1; i <= args[2]; i++) {
-        dockerify(i, args, undefined);
-      }
-    } catch {
-      sendError(message, '404');
-      return;
+
+    for (i = 1; i <= args[2]; i++) {
+      dockerify(i, args);
     }
 
     let embed = new Discord.MessageEmbed()
-      .setTitle('SpamBot is starting, please wait and see the result!')
+      .setTitle('SpamBot has started, please wait and see the result! If the game is not getting flooded please recheck your game pin :)')
       .setColor(color.green)
       .setFooter('Kahoot SpamBot by A Eugene#5558');
     
