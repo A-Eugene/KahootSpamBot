@@ -65,8 +65,16 @@ client.on('message', async message => {
       .setTitle('Kahoot Spambot Help')
       .setColor(color.green)
       .setDescription('Kahoot SpamBot is a discord bot that is made to flood live-hosted kahoot games and answers randomly. Just put the game pin, bot name, and the amount of bots and this bot will do the work itself. The more bots you requested the more chances of your bot getting 1st, 2nd or 3rd place which will open the possibilities of getting your teachers insane HAHAHAHA')
-      .addField('Commands:', `1. kahootspam help: gives a brief explanation on how this bot works and how to use its commands\n2. kahootspam [Game Pin without space] [Bot name] [Amount of bots]: floods kahoot game with [Game Pin] with the name [Bot name]1, [Bot name]2 to [Bot name][Amount of Bots] and answer the questions randomly`, false)
+      .addField('Commands:', `1. kahootspam help: gives a brief explanation on how this bot works and how to use its commands\n2. kahootspam [Game Pin without space] [Bot name] [Amount of bots]: floods kahoot game with [Game Pin] with the name [Bot name]1, [Bot name]2 to [Bot name][Amount of Bots] and answer the questions randomly\n3. kahootspam invite: gives you a link so you can invite KahootSpamBot to your server`, false)
       .addField('User agreement:', `1. I do not take any responsibilities on how will you use this bot, use this at your own risk\n2. This bot is in a development stage. Bugs and glitches might appear anytime so please be patient because we all wanted the best this bot can do :)`, false)
+      .setFooter('Kahoot SpamBot by A Eugene#5558');
+
+    message.channel.send(embed);
+  } else if (command == 'invite') {
+    let embed = new Discord.MessageEmbed()
+      .setTitle('Invite KahootSpamBot to your server')
+      .setColor(color.green)
+      .addField('https://bit.ly/3yUDVIK', 'Use this link to invite KahootSpamBot to your server!', false)
       .setFooter('Kahoot SpamBot by A Eugene#5558');
 
     message.channel.send(embed);
